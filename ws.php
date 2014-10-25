@@ -28,11 +28,17 @@ $res_query = $db->prepare("SELECT c.CategoryName,
                                   r.Position,
                                   r.CourseTime,
                                   p.FirstLastName,
+                                  cl.ClubName,
                                   s.StatusCode
-                           FROM ResultData r, ResultNames p, ResultCategories c, ResultStatus s
+                           FROM ResultData r,
+                                ResultNames p,
+                                ResultCategories c,
+                                ResultClubs cl,
+                                ResultStatus s
                            WHERE r.ResFK = ?
                              AND r.NameFK = p.NamePK
                              AND r.CatFK = c.CatPK
+                             AND r.ClubFK = cl.ClubPK
                              AND r.StatusFK = s.StatusPK;");
 $res_query->execute(array($event_id));
 $results = $res_query->fetchAll();
@@ -48,6 +54,7 @@ foreach($categories as $category) {
 foreach($results as $data) {
     $result = array( "position" => $data["Position"],
                      "name" => $data["FirstLastName"],
+                     "club" => $data["ClubName"],
                      "time" => $data["CourseTime"],
                      "status" => $data["StatusCode"] );
     array_push($event["categories"][$data["CategoryName"]], $result);

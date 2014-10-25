@@ -21,27 +21,31 @@ Example:
             {
                 "position": "1",
                 "name": "Wim Hoekx",
+                "club": "hamok",
                 "time": "01:23:45",
                 "status": "OK"
             },
             {
                 "position": "2",
                 "name": "T\u00e9st",
+                "club": "hamok",
                 "time": "01:23:46",
                 "status": "OK"
             }
         ],
         "HE": [
             {
-                "position": "1",
-                "name": "Desmond Franssen",
-                "time": "01:23:45",
+                "position": "2",
+                "name": "Jeroen Hoekx",
+                "club": "hamok",
+                "time": "01:23:46",
                 "status": "OK"
             },
             {
-                "position": "2",
-                "name": "Jeroen Hoekx",
-                "time": "01:23:46",
+                "position": "1",
+                "name": "Desmond Franssen",
+                "club": "trol",
+                "time": "01:23:45",
                 "status": "OK"
             }
         ]
