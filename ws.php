@@ -5,7 +5,7 @@ if (!array_key_exists("lauf", $_GET)) {
     die("'?lauf=' required");
 }
 
-require_once("config.php");
+require_once("json-config.php");
 
 $db = new PDO($dsn, $username, $password);
 

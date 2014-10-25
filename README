@@ -1,0 +1,49 @@
+JSON webservice for Helga-O web results.
+
+Add a file json-config.php:
+<?php
+
+$dsn = "mysql:host=localhost;dbname=<>";
+$username = "<>";
+$password = "<>";
+
+?>
+
+
+Example:
+
+{
+    "meta": {
+        "date": "2014-10-25T10:05:13+02:00"
+    },
+    "categories": {
+        "H55": [
+            {
+                "position": "1",
+                "name": "Wim Hoekx",
+                "time": "01:23:45",
+                "status": "OK"
+            },
+            {
+                "position": "2",
+                "name": "T\u00e9st",
+                "time": "01:23:46",
+                "status": "OK"
+            }
+        ],
+        "HE": [
+            {
+                "position": "1",
+                "name": "Desmond Franssen",
+                "time": "01:23:45",
+                "status": "OK"
+            },
+            {
+                "position": "2",
+                "name": "Jeroen Hoekx",
+                "time": "01:23:46",
+                "status": "OK"
+            }
+        ]
+    }
+}
