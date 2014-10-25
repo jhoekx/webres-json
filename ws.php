@@ -2,20 +2,21 @@
 
 if (!array_key_exists("lauf", $_GET)) {
     header("HTTP/1.0 400 Bad Request");
+    header("Content-Type: text/plain");
     die("'?lauf=' required");
 }
 
-require_once("json-config.php");
-
-$db = new PDO($dsn, $username, $password);
-
 $event_id = $_GET["lauf"];
+
+require_once("json-config.php");
+$db = new PDO($dsn, $username, $password);
 
 $meta_query = $db->prepare("SELECT CompDate FROM ResultHeader WHERE CompetitionPK = ?");
 $meta_query->execute(array($event_id));
 $meta = $meta_query->fetchAll();
 if (count($meta) == 0) {
     header("HTTP/1.0 404 File Not Found");
+    header("Content-Type: text/plain");
     die("Event not found");
 }
 
