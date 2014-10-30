@@ -55,8 +55,8 @@ foreach($categories as $category) {
 
 foreach($results as $data) {
     $result = array( "position" => $data["Position"],
-                     "name" => $data["FirstLastName"],
-                     "club" => $data["ClubName"],
+                     "name" => html_entity_decode($data["FirstLastName"]),
+                     "club" => html_entity_decode($data["ClubName"]),
                      "time" => $data["CourseTime"],
                      "status" => $data["StatusCode"] );
     array_push($event["categories"][$data["CategoryName"]], $result);
