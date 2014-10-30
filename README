@@ -13,41 +13,58 @@ $password = "<>";
 Example:
 
 {
-    "meta": {
-        "date": "2014-10-25T10:05:13+02:00"
-    },
+    "date": "2014-10-25T10:05:13+02:00",
+    "name": "Test",
+    "location": "Lommel",
     "categories": {
-        "H55": [
-            {
-                "position": "1",
-                "name": "Wim Hoekx",
-                "club": "hamok",
-                "time": "01:23:45",
-                "status": "OK"
-            },
-            {
-                "position": "2",
-                "name": "T\u00e9st",
-                "club": "hamok",
-                "time": "01:23:46",
-                "status": "OK"
-            }
-        ],
-        "HE": [
-            {
-                "position": "2",
-                "name": "Jeroen Hoekx",
-                "club": "hamok",
-                "time": "01:23:46",
-                "status": "OK"
-            },
-            {
-                "position": "1",
-                "name": "Desmond Franssen",
-                "club": "trol",
-                "time": "01:23:45",
-                "status": "OK"
-            }
-        ]
+        "H55": {
+            "name": "H55",
+            "distance": "1000",
+            "climb": "20",
+            "results": [
+                {
+                    "position": "1",
+                    "name": "Wim Hoekx",
+                    "club": "hamok",
+                    "time": "01:23:45",
+                    "status": "OK"
+                },
+                {
+                    "position": "2",
+                    "name": "T\u00e9st",
+                    "club": "hamok",
+                    "time": "01:23:46",
+                    "status": "OK"
+                },
+                {
+                    "position": "3",
+                    "name": "T\u00c9est",
+                    "club": "trol",
+                    "time": "01:23:47",
+                    "status": "OK"
+                }
+            ]
+        },
+        "HE": {
+            "name": "HE",
+            "distance": "2000",
+            "climb": "50",
+            "results": [
+                {
+                    "position": "2",
+                    "name": "Jeroen Hoekx",
+                    "club": "hamok",
+                    "time": "01:23:46",
+                    "status": "OK"
+                },
+                {
+                    "position": "1",
+                    "name": "Desmond Franssen",
+                    "club": "trol",
+                    "time": "01:23:45",
+                    "status": "OK"
+                }
+            ]
+        }
     }
 }

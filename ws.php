@@ -13,7 +13,11 @@ $event_id = $_GET["lauf"];
 require_once("json-config.php");
 $db = new PDO($dsn, $username, $password);
 
-$meta_query = $db->prepare("SELECT CompDate FROM $tabResultHeader WHERE id = ?");
+$meta_query = $db->prepare("SELECT CompDate,
+                                   EventDescription,
+                                   CompSite
+                            FROM $tabResultHeader
+                            WHERE id = ?");
 $meta_query->execute(array($event_id));
 $meta = $meta_query->fetchAll();
 if (count($meta) == 0) {
@@ -22,7 +26,12 @@ if (count($meta) == 0) {
     die("Event not found");
 }
 
-$cat_query = $db->prepare("SELECT CategoryName FROM $tabResultCategories WHERE ResFK = ?");
+$cat_query = $db->prepare("SELECT CategoryName,
+                                  CategoryNameLong,
+                                  CatLength,
+                                  CatClimb
+                           FROM $tabResultCategories
+                           WHERE ResFK = ?");
 $cat_query->execute(array($event_id));
 $categories = $cat_query->fetchAll();
 
@@ -45,12 +54,16 @@ $res_query = $db->prepare("SELECT c.CategoryName,
 $res_query->execute(array($event_id));
 $results = $res_query->fetchAll();
 
-$event = array();
-$event["meta"] = array( "date" => date("c", strtotime($meta[0]["CompDate"])) );
+$event = array( "date" => date("c", strtotime($meta[0]["CompDate"])),
+                "name" => $meta[0]["EventDescription"],
+                "location" => $meta[0]["CompSite"],
+                "categories" => array() );
 
-$event["categories"] = array();
 foreach($categories as $category) {
-    $event["categories"][$category["CategoryName"]] =  array();
+    $event["categories"][$category["CategoryName"]] =  array( "name" => $category["CategoryNameLong"],
+                                                              "distance" => $category["CatLength"],
+                                                              "climb" => $category["CatClimb"],
+                                                              "results" => array() );
 }
 
 foreach($results as $data) {
@@ -59,7 +72,7 @@ foreach($results as $data) {
                      "club" => html_entity_decode($data["ClubName"]),
                      "time" => $data["CourseTime"],
                      "status" => $data["StatusCode"] );
-    array_push($event["categories"][$data["CategoryName"]], $result);
+    array_push($event["categories"][$data["CategoryName"]]["results"], $result);
 }
 
 header("Content-Type: application/json");

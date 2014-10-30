@@ -9,3 +9,6 @@ insert into ResultData (ResFK, CatFK, ClubFK, NameFK, Position, CourseTime, Stat
 insert into ResultData (ResFK, CatFK, ClubFK, NameFK, Position, CourseTime, StatusFK) values (1, 2, 1, 2, 1, "1:23:45", 0);
 insert into ResultData (ResFK, CatFK, ClubFK, NameFK, Position, CourseTime, StatusFK) values (1, 2, 1, 4, 2, "1:23:46", 0);
 insert into ResultData (ResFK, CatFK, ClubFK, NameFK, Position, CourseTime, StatusFK) values (1, 2, 2, 5, 3, "1:23:47", 0);
+update ResultCategories set CategoryNameLong = 'HE', CatLength = 2000, CatClimb = 50 WHERE CategoryName = 'HE';
+update ResultCategories set CategoryNameLong = 'H55', CatLength = 1000, CatClimb = 20 WHERE CategoryName = 'H55';
+update ResultHeader set CompSite = "Lommel";
