@@ -1,5 +1,7 @@
 <?php
 
+require_once("configs.php");
+
 if (!array_key_exists("lauf", $_GET)) {
     header("HTTP/1.0 400 Bad Request");
     header("Content-Type: text/plain");
@@ -11,7 +13,7 @@ $event_id = $_GET["lauf"];
 require_once("json-config.php");
 $db = new PDO($dsn, $username, $password);
 
-$meta_query = $db->prepare("SELECT CompDate FROM ResultHeader WHERE CompetitionPK = ?");
+$meta_query = $db->prepare("SELECT CompDate FROM $tabResultHeader WHERE id = ?");
 $meta_query->execute(array($event_id));
 $meta = $meta_query->fetchAll();
 if (count($meta) == 0) {
@@ -20,7 +22,7 @@ if (count($meta) == 0) {
     die("Event not found");
 }
 
-$cat_query = $db->prepare("SELECT CategoryName FROM ResultCategories WHERE ResFK = ?");
+$cat_query = $db->prepare("SELECT CategoryName FROM $tabResultCategories WHERE ResFK = ?");
 $cat_query->execute(array($event_id));
 $categories = $cat_query->fetchAll();
 
@@ -30,11 +32,11 @@ $res_query = $db->prepare("SELECT c.CategoryName,
                                   p.FirstLastName,
                                   cl.ClubName,
                                   s.StatusCode
-                           FROM ResultData r,
-                                ResultNames p,
-                                ResultCategories c,
-                                ResultClubs cl,
-                                ResultStatus s
+                           FROM $tabResultData r,
+                                $tabResultNames p,
+                                $tabResultCategories c,
+                                $tabResultClubs cl,
+                                $tabResultStatus s
                            WHERE r.ResFK = ?
                              AND r.NameFK = p.NamePK
                              AND r.CatFK = c.CatPK
@@ -61,6 +63,6 @@ foreach($results as $data) {
 }
 
 header("Content-Type: application/json");
-print json_encode($event, JSON_PRETTY_PRINT);
+print json_encode($event);
 
 ?>
